@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cifras de Louvor</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+h1{
+text-align:center;
+}
+
+.musica{
+background:white;
+padding:20px;
+margin:20px 0;
+border-radius:10px;
+}
+
+.acorde{
+color:#d35400;
+font-weight:bold;
+}
+
+button{
+padding:10px;
+margin:5px;
+border:none;
+background:#2c3e50;
+color:white;
+border-radius:5px;
+}
+
+.escuro{
+background:black;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Cifras de Louvor</h1>
+
+<input type="text" id="busca" placeholder="Buscar música..." onkeyup="buscar()">
+
+<div class="musica">
+
+<h2>A Casa é Sua</h2>
+
+<button onclick="favoritar('A Casa é Sua')">⭐ Favoritar</button>
+<button onclick="modoEscuro()">Modo Palco</button>
+<button onclick="rolagem()">Rolagem</button>
+
+<pre>
+
+<span class="acorde">G</span>
+Nós te damos honra
+
+<span class="acorde">D</span>
+Nós te damos glória
+
+<span class="acorde">Em</span>
+Nós te damos o louvor
+
+<span class="acorde">C</span>
+Que é devido ao teu nome
+
+</pre>
+
+</div>
+
+<script>
+
+function buscar(){
+
+let input=document.getElementById("busca").value.toLowerCase();
+let musicas=document.getElementsByClassName("musica");
+
+for(let i=0;i<musicas.length;i++){
+
+let texto=musicas[i].innerText.toLowerCase();
+
+if(texto.includes(input)){
+musicas[i].style.display="block";
+}else{
+musicas[i].style.display="none";
+}
+
+}
+
+}
+
+function modoEscuro(){
+
+document.body.classList.toggle("escuro");
+
+}
+
+function rolagem(){
+
+setInterval(function(){
+
+window.scrollBy(0,1);
+
+},100);
+
+}
+
+function favoritar(nome){
+
+let favoritos=JSON.parse(localStorage.getItem("favoritos"))||[];
+
+favoritos.push(nome);
+
+localStorage.setItem("favoritos",JSON.stringify(favoritos));
+
+alert("Música favoritada!");
+
+}
+
+</script>
+
+</body>
+</html>
