@@ -132,4 +132,40 @@ alert("Música favoritada!");
 </script>
 
 </body>
+
 </html>
+<script>
+
+const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8OqDGLtwYxFegDDy137kvgXJxJzG_ndXzFD6OWo8K9ZY5nI6P0hMJKvGfEhd7T8iWPSmQq3QmTghP/pub?output=csv";
+
+fetch(url)
+.then(response => response.text())
+.then(data => {
+
+let linhas = data.split("\n");
+linhas.shift();
+
+let lista = document.getElementById("lista");
+
+linhas.forEach(linha => {
+
+let colunas = linha.split(",");
+
+let musica = colunas[1];
+let cifra = colunas.slice(3).join(",");
+
+let item = document.createElement("div");
+item.className = "musica";
+item.innerText = musica;
+
+item.onclick = function(){
+document.getElementById("cifra").innerText = cifra;
+}
+
+lista.appendChild(item);
+
+});
+
+});
+
+</script>
